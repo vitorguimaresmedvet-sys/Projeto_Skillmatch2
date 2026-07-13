@@ -43,3 +43,43 @@ O S1 visa transformar o SkillMatch 1.0 em uma aplicação modular, separando de 
 ### Encerramento
 
 O resultado esperado deste marco é entregar a aplicação 100% funcional, com o motor modularizado e o ambiente preparado para a construção da interface definitiva.
+
+---
+
+
+## S1.1 — Criação do ponto de entrada da aplicação
+
+### Resumo
+
+O S1.1 tem como objetivo implementar o ponto de entrada do SkillMatch 2.0 através do arquivo `main.js`, estabelecendo a fundação técnica necessária para suportar a nova arquitetura modular.
+
+### Entregas previstas
+
+* Criação estrutural do arquivo `main.js`.
+* Configuração do arquivo `Index.html` para suporte nativo a módulos ES.
+* Definição da rotina de inicialização da aplicação.
+* Preparação do ambiente para a recepção e integração dos demais módulos.
+
+### Encerramento
+
+O marco S1.1 encontra-se atualmente em andamento, sendo o passo inicial e essencial para tirar a estrutura modular do papel.
+
+---
+
+## 13/07/2026 — S1: Conclusão da Sprint
+
+## [Concluído] S1 — Estrutura Funcional
+
+### Resumo do Progresso
+Migração completa do script monolítico legível por console para uma infraestrutura modular e escalável de Single Page Application, respeitando os padrões de Clean Code e separação de conceitos.
+
+### Entregas Efetuadas
+* **index.html**: Injeção da propriedade `type="module"` estabilizada.
+* **motor.js**: Modelos de POO (`Candidato` e `Vaga`) implementados e função analítica adaptada para exportar objetos completos de metadados.
+* **dados.js**: Camada assíncrona desenvolvida utilizando `fetch` consumindo banco estruturado JSON local, isolando tratamento de erros através de capturas `try/catch`.
+* **main.js**: Orquestração central via escuta do evento `DOMContentLoaded` e encapsulamento de estado interno por meio de Closures JavaScript.
+* **ui.js**: Módulo inicializado e integrado ao pipeline principal, assumindo com sucesso a responsabilidade de saída e recepção de dados estruturados provenientes do orquestrador.
+* **Homologação**: Fluxo completo de execução (`main -> dados -> motor -> ui`) testado de ponta a ponta sem vazamento de escopo ou erros de runtime.
+
+---
+
