@@ -15,6 +15,8 @@ export async function buscarVagas() {
         console.error("Falha na requisição das vagas:", erro);
         throw erro;
         
+        return [];
+        
     }
 }
 
