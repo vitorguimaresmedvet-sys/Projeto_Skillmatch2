@@ -35,8 +35,12 @@ export class VagaFrontEnd extends Vagas{
 
 export function avaliarCandidato(candidatoObjeto, vagaObjeto, exibirLogs = true){
 
-    const requisitosVaga = vagaObjeto.requisitos || [];
+    let requisitosVaga = vagaObjeto.requisitos || [];
     const habilidadesCandidato = candidatoObjeto.habilidades || [];
+
+    if (typeof requisitosVaga === "string") {
+        requisitosVaga = [requisitosVaga];
+    }
 
     if (exibirLogs) {
         console.log("Requisitos da vaga:", requisitosVaga);
@@ -44,11 +48,11 @@ export function avaliarCandidato(candidatoObjeto, vagaObjeto, exibirLogs = true)
     }
         
     const habilidadesCorrespondentes = requisitosVaga.filter((requisito) => 
-    candidatoObjeto.habilidades.includes(requisito)
+    habilidadesCandidato.includes(requisito)
 );
 
 const habilidadesFaltantes = requisitosVaga.filter((requisito) => 
-    !candidatoObjeto.habilidades.includes(requisito)
+    !habilidadesCandidato.includes(requisito)
 );
     const requisitosAtendidos = habilidadesCorrespondentes.length;
     const totalRequisitos = requisitosVaga.length;
@@ -63,6 +67,7 @@ const habilidadesFaltantes = requisitosVaga.filter((requisito) =>
         percentual: percentualAtendimento,
         classificacao: classificacao,
         faltantes: habilidadesFaltantes,
-        encontrados: habilidadesCorrespondentes
+        encontrados: habilidadesCorrespondentes,
+        encontradas: habilidadesCorrespondentes
     };
 }
