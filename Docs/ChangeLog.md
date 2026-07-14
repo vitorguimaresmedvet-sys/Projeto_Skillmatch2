@@ -81,5 +81,29 @@ Migração completa do script monolítico legível por console para uma infraest
 * **ui.js**: Módulo inicializado e integrado ao pipeline principal, assumindo com sucesso a responsabilidade de saída e recepção de dados estruturados provenientes do orquestrador.
 * **Homologação**: Fluxo completo de execução (`main -> dados -> motor -> ui`) testado de ponta a ponta sem vazamento de escopo ou erros de runtime.
 
+### Encerramento
+
+O resultado esperado deste marco é entregar a aplicação 100% funcional, com o motor modularizado e o ambiente preparado para a construção da interface definitiva.
+
+---
+##  14/07/2026 — S2: Conclusão da Sprint
+
+### [Concluído] S2 — Interface de Usuário Dinâmica
+
+### Resumo do Progresso
+Conclusão da camada visual da aplicação. Migração do formulário para o DOM, implementação de validação rigorosa, renderização dinâmica de cards de vagas e estilização responsiva (Mobile First), garantindo a conversão do console em uma interface interativa.
+
+### Entregas Efetuadas
+* **ui.js**: Desenvolvimento completo do gerenciamento de eventos (submit), manipulação do DOM (createElement), e feedback de acessibilidade via aria-live.
+
+* **style.css**: Implementação de Layout flexível e responsivo, tratando a hierarquia de elementos e organização do grid de cards.
+
+* **Validação**: Implementação de checagem de campos obrigatórios com feedback visual contextual para o usuário final.
+
+* **Motor**: Blindagem lógica (try/catch e Short-circuit evaluation) para garantir estabilidade na análise de dados JSON.
+
+### Encerramento
+A aplicação atinge o estado de SPA funcional. A interface agora é o meio principal de interação, e o sistema está validado contra erros comuns de entrada de dados.
+
 ---
 

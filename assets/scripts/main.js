@@ -1,6 +1,6 @@
-import { executarAnalise, avaliarCandidato, Candidato } from "./motor.js";
-import { buscarVagas, obterPerfilLocalStorage, salvarPerfilLocalStorage } from "./dados.js";
-import { exibirRelatorioInterface } from "./ui.js";
+import { buscarVagas, obterPerfilLocalStorage, salvarPerfilLocalStorage } from './dados.js';
+import { avaliarCandidato, Candidato } from './motor.js';
+import { exibirResultadosInterface, configurarFormulario } from './ui.js';
 
 // Função Closure real para contagem de análises realizadas
 
@@ -12,48 +12,52 @@ function criarContadorDeAnalises() {
     };
 }
 
-const incrementarContagem = criarContadorDeAnalises();
+const incrementarAnalises = criarContadorDeAnalises();
+
+let listaVagasGlobal = [];
 
 async function iniciarAplicacao() {
 
     console.log("⚙️ SkillMatch 2.0: Inicializando sistemas modulares...");
     
     try {
-        // 1. Tenta carregar os dados brutos de vagas do arquivo JSON externo
-        const listaVagas = await buscarVagas();
-        console.log(`📋 Banco de dados de vagas carregado com sucesso (${listaVagas.length} vagas encontradas).`);
-        
-        // 2. Tenta recuperar perfil salvo ou simula um perfil temporário para testes na S1
-        let perfilCandidato = obterPerfilLocalStorage();
-        
-        if (!perfilCandidato) {
-            console.log("👋 Primeira visita detectada ou perfil limpo. Criando perfil de teste padrão...");
-            perfilCandidato = new Candidato("Vitor Desenvolvedor", 25, "Front-End", ["JavaScript", "HTML", "CSS"], 6);
+        listaVagasGlobal = await buscarVagas();
+        console.log(`📋 Banco de dados de vagas carregado com sucesso (${listaVagasGlobal.length} vagas encontradas).`);
+            configurarFormulario((dadosCandidato) => {
+            console.log(`📥 Dados recebidos do formulário! Nome: ${dadosCandidato.nome}`);
+
+            // 1. Instanciamos a classe com os dados reais digitados na tela
+            const perfilCandidato = new Candidato(
+                dadosCandidato.nome, 
+                null, 
+                dadosCandidato.area, 
+                dadosCandidato.habilidades, 
+                dadosCandidato.experiencia // O nome que veio do seu ui.js
+            );
+
             salvarPerfilLocalStorage(perfilCandidato);
-        } else {
-            console.log(`👤 Perfil carregado do LocalStorage: ${perfilCandidato.nome}`);
-        }
+            console.log("💾 Perfil salvo no LocalStorage!");
 
-        // 3. Executa a lógica de compatibilidade percorrendo o array de vagas com MAP (Requisito de Arrays)
-        console.log("\n--- ⚡ EXECUTANDO MOTOR DE COMPATIBILIDADE (TESTE S1) ---");
-        
-        const relatorioResultados = listaVagas.map(vaga => {
-            const numeroAnalise = incrementarAnalises();
-            const resultadoMecanismo = avaliarCandidato(perfilCandidato, vaga);
-            
-            return {
-                analiseID: numeroAnalise,
-                vagaCargo: vaga.cargo,
-                empresa: vaga.empresa || "Tech Corp",
-                compatibilidade: `${resultadoMecanismo.percentual.toFixed(0)}%`,
-                classificacao: resultadoMecanismo.classificacao,
-                faltantes: resultadoMecanismo.faltantes
-            };
+            // 2. Roda a análise percorrendo as vagas globais
+            const relatorioResultados = listaVagasGlobal.map(vaga => {
+                const numeroAnalise = incrementarAnalises();
+                const resultadoMecanismo = avaliarCandidato(perfilCandidato, vaga);
+                
+                return {
+                    analiseID: numeroAnalise,
+                    vagaCargo: vaga.cargo,
+                    empresa: vaga.empresa || "Tech Corp",
+                    compatibilidade: resultadoMecanismo.percentual,
+                    classificacao: resultadoMecanismo.classificacao,
+                    encontradas: resultadoMecanismo.encontradas,
+                    faltantes: resultadoMecanismo.faltantes
+                };
+            });
+
+            // 3. Manda para a interface (cuidado com a letra 's' que corrigimos!)
+            exibirResultadosInterface(relatorioResultados);
         });
-
-        exibirRelatorioInterface (relatorioResultados);
-        console.log("-------------------------------------------------------");
-
+        
     } catch (erro) {
         console.error("🚨 Falha crítica ao inicializar aplicação modular:", erro);
     }
@@ -61,5 +65,3 @@ async function iniciarAplicacao() {
 
 // Inicializa a aplicação quando o DOM estiver completamente pronto
 document.addEventListener("DOMContentLoaded", iniciarAplicacao);
-
-iniciarAplicacao();

@@ -34,13 +34,24 @@ export class VagaFrontEnd extends Vagas{
 // 2. Logica de Compatibilidade Exportada
 
 export function avaliarCandidato(candidatoObjeto, vagaObjeto, exibirLogs = true){
-    // Encontra quais requisitos o candidato TEM (Atendidos) usando `filter` (RF08).
-    const habilidadesCorrespondentes = vagaObjeto.requisitos.filter((requisito) => candidatoObjeto.habilidades.includes(requisito));
 
-    const habilidadesFaltantes = vagaObjeto.requisitos.filter((requisito) => !candidatoObjeto.habilidades.includes(requisito));
+    const requisitosVaga = vagaObjeto.requisitos || [];
+    const habilidadesCandidato = candidatoObjeto.habilidades || [];
 
+    if (exibirLogs) {
+        console.log("Requisitos da vaga:", requisitosVaga);
+        console.log("Habilidades do candidato:", habilidadesCandidato);
+    }
+        
+    const habilidadesCorrespondentes = requisitosVaga.filter((requisito) => 
+    candidatoObjeto.habilidades.includes(requisito)
+);
+
+const habilidadesFaltantes = requisitosVaga.filter((requisito) => 
+    !candidatoObjeto.habilidades.includes(requisito)
+);
     const requisitosAtendidos = habilidadesCorrespondentes.length;
-    const totalRequisitos = vagaObjeto.requisitos.length;
+    const totalRequisitos = requisitosVaga.length;
     const percentualAtendimento = (requisitosAtendidos / totalRequisitos) * 100;
 
     let classificacao = "";
