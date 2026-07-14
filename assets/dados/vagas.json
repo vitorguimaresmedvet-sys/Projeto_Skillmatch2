@@ -1,10 +1,26 @@
 [
    {
-      "id": "01",
+      "id": "0",
       "empresa": "exemplo",
       "cargo": "gerente de exemplo",
       "requisitos": "PHD em exemplologia e experiência em exemplos",
       "salario": "10000",
       "modalidade": "presencial"
+   }, 
+   {
+      "id": "01",
+      "empresa": "Tech Solutions",
+      "cargo": "Desenvolvedor Back-End Júnior",
+      "requisitos": ["JavaScript", "Node.js", "SQL"],
+      "salario": 4800,
+      "modalidade": "Presencial"
+   },
+   {
+      "id": "02",
+      "empresa": "InovaTech",
+      "cargo": "Desenvolvedor Back-End Pleno",
+      "requisitos": ["JavaScript", "Node.js", "Docker", "React"],
+      "salario": 7000,
+      "modalidade": "Remoto"
    }
 ]

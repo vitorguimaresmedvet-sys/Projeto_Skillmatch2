@@ -1,3 +1,5 @@
+import { VagaFrontEnd } from "./motor.js";
+
 const CAMINHO_VAGAS = "./assets/dados/vagas.json";
 const CHAVE_PERFIL = "skillmatch_perfil";
 
@@ -10,7 +12,20 @@ export async function buscarVagas() {
             throw new Error(`Erro ao carregar banco de dados de vagas: ${resposta.status}`);
         }
         const vagas = await resposta.json();
-        return vagas;
+
+        const vagasInstanciadas = vagas.map(item => {
+            return new VagaFrontEnd(
+                item.cargo,
+                item.empresa,
+                item.requisitos,
+                item.salario,
+                item.modalidade,
+                item.nivel || "Júnior" 
+            );
+        });
+
+        console.log(`Banco de dados de vagas carregado com sucesso (${vagas.length} vagas encontradas).`);
+        return vagasInstanciadas;
     } catch (erro) {
         console.error("Falha na requisição das vagas:", erro);
         throw erro;
