@@ -1,3 +1,6 @@
+import { buscarVagas, obterPerfilLocalStorage, salvarPerfilLocalStorage, carregarPerfilLocalStorage } from './dados.js';
+import { avaliarCandidato, Candidato } from './motor.js';
+import { exibirResultadosInterface, configurarFormulario, filtrarVagasPorCargo, aplicarFiltros } from './ui.js';
 import { buscarVagas, obterPerfilLocalStorage, salvarPerfilLocalStorage } from './dados.js';
 import { avaliarCandidato, Candidato, VagaFrontEnd } from './motor.js';
 import { exibirResultadosInterface, configurarFormulario, preencherFormulario } from './ui.js';
@@ -86,7 +89,11 @@ async function iniciarAplicacao() {
 // Inicializa a aplicação quando o DOM estiver completamente pronto
 document.addEventListener("DOMContentLoaded", iniciarAplicacao);
 
-/* const perfilCandidato = obterPerfilLocalStorage();
-if (perfilCandidato) {
-    console.log("💾 Perfil carregado do LocalStorage!");
-    configurarFormulario(perfilCandidato); */
+// Filtro de vagas por cargo
+const inputBusca = document.getElementById("input-busca");
+const selectModalidade = document.getElementById("filtro-modalidade");
+
+if (inputBusca && selectModalidade) {
+    inputBusca.addEventListener("input", aplicarFiltros);
+    selectModalidade.addEventListener("change", aplicarFiltros);
+}

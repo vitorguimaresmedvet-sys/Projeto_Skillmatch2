@@ -11,8 +11,19 @@
     <body>
 
         <header role="banner">
+
+            <div class="busca-container">
+                <input type="text" id="input-busca" placeholder="Buscar vagas..." />
+                <button type="submit" id="btn-buscar">Buscar</button>
+                <select id="filtro-modalidade">
+                    <option value="" disabled selected>Modalidade</option>
+                    <option value="Presencial">Presencial</option>
+                    <option value="Remoto">Remoto</option>
+                </select>
+            </div>
+
             <div class="header-container">
-                <h1>SkillMatch <span></h1>
+                <h1>SkillMatch</h1>
                 <p>Match Profissional Inteligente</p>
                 <nav role="navigation">
                     <ul>
@@ -69,6 +80,8 @@
             <h2 id="titulo-vagas">Vagas Compatíveis</h2>
             
             <div id="status-sistema" aria-live="polite" class="status-alerta"></div>
+
+            <div id="mensagem-zero" aria-live="polite" class="mensagem-feedback"></div>
 
             <div id="container-cards" class="cards-grid"></div>
         </section>
