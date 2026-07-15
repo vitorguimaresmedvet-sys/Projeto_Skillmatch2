@@ -11,7 +11,9 @@ export function exibirResultadosInterface(relatorio) {
     relatorio.forEach(resultado => {
         const card = document.createElement("div");
         card.classList.add("card");
-        card.dataset.modalidade = resultado.vaga.modalidade.toLowerCase();
+        
+        card.dataset.modalidade = (resultado.modalidade || "indefinido").toLowerCase();
+        
         card.innerHTML = `<h3>${resultado.vagaCargo}</h3>
             <p><strong>Empresa:</strong> ${resultado.empresa}</p>
             <p><strong>Compatibilidade:</strong> ${resultado.compatibilidade}%</p>
@@ -24,10 +26,9 @@ export function exibirResultadosInterface(relatorio) {
         fragmento.appendChild(card);
     });
 
-    container.appendChild(card);
+        container.appendChild(fragmento);
 
     console.log("Exibindo resultado na interface");
-
     console.table(relatorio);
 }
 
@@ -135,4 +136,15 @@ export function preencherFormulario(perfil) {
             : perfil.habilidades || "";
     }
     if (inputExperiencia) inputExperiencia.value = perfil.experienciaMeses || "";
+}
+
+export function destacarMelhorVaga(id) {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        if (card.id === id) {
+            card.classList.add('destaque');
+        } else {
+            card.classList.remove('destaque');
+        }
+    });
 }

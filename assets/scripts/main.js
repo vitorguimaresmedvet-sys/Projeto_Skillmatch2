@@ -1,9 +1,6 @@
-import { buscarVagas, obterPerfilLocalStorage, salvarPerfilLocalStorage, carregarPerfilLocalStorage } from './dados.js';
-import { avaliarCandidato, Candidato } from './motor.js';
-import { exibirResultadosInterface, configurarFormulario, filtrarVagasPorCargo, aplicarFiltros } from './ui.js';
 import { buscarVagas, obterPerfilLocalStorage, salvarPerfilLocalStorage } from './dados.js';
-import { avaliarCandidato, Candidato, VagaFrontEnd } from './motor.js';
-import { exibirResultadosInterface, configurarFormulario, preencherFormulario } from './ui.js';
+import { avaliarCandidato, Candidato } from './motor.js';
+import { exibirResultadosInterface, configurarFormulario, filtrarVagasPorCargo, aplicarFiltros, preencherFormulario, destacarMelhorVaga } from './ui.js';
 
 // Função Closure real para contagem de análises realizadas
 function criarContadorDeAnalises() {
@@ -62,6 +59,7 @@ async function iniciarAplicacao() {
                     analiseID: numeroAnalise,
                     vagaCargo: vaga.cargo,
                     empresa: vaga.empresa || "Tech Corp",
+                    modalidade: vaga.modalidade,
                     compatibilidade: resultadoMecanismo.percentual,
                     classificacao: resultadoMecanismo.classificacao,
                     encontradas: resultadoMecanismo.encontradas,
@@ -70,7 +68,15 @@ async function iniciarAplicacao() {
             });
 
             exibirResultadosInterface(relatorioResultados);
-        });
+
+            const melhorVaga = relatorioResultados.reduce((vagaAtual, vagaComparada) => {
+    return (vagaComparada.compatibilidade > vagaAtual.compatibilidade) ? vagaComparada : vagaAtual;
+    }, relatorioResultados[0]);
+            console.log(`💡 Melhor vaga: ${melhorVaga.vagaCargo} na empresa ${melhorVaga.empresa}, com ${melhorVaga.compatibilidade.toFixed(2)}% dos requisitos atendidos.`);
+        if (melhorVaga) {
+    destacarMelhorVaga(melhorVaga.analiseID);
+    }
+    });
 
 
         const perfilSalvo = obterPerfilLocalStorage();
