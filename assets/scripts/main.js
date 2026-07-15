@@ -1,6 +1,6 @@
-import { buscarVagas, obterPerfilLocalStorage, salvarPerfilLocalStorage } from './dados.js';
+import { buscarVagas, obterPerfilLocalStorage, salvarPerfilLocalStorage, carregarPerfilLocalStorage } from './dados.js';
 import { avaliarCandidato, Candidato } from './motor.js';
-import { exibirResultadosInterface, configurarFormulario } from './ui.js';
+import { exibirResultadosInterface, configurarFormulario, filtrarVagasPorCargo, aplicarFiltros } from './ui.js';
 
 // Função Closure real para contagem de análises realizadas
 
@@ -65,3 +65,12 @@ async function iniciarAplicacao() {
 
 // Inicializa a aplicação quando o DOM estiver completamente pronto
 document.addEventListener("DOMContentLoaded", iniciarAplicacao);
+
+// Filtro de vagas por cargo
+const inputBusca = document.getElementById("input-busca");
+const selectModalidade = document.getElementById("filtro-modalidade");
+
+if (inputBusca && selectModalidade) {
+    inputBusca.addEventListener("input", aplicarFiltros);
+    selectModalidade.addEventListener("change", aplicarFiltros);
+}

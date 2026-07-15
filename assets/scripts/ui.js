@@ -6,10 +6,12 @@ export function exibirResultadosInterface(relatorio) {
 
     container.innerHTML = "";
     statusSistema.textContent = "Resultados encontrados:";
+    const fragmento = document.createDocumentFragment();
 
     relatorio.forEach(resultado => {
         const card = document.createElement("div");
         card.classList.add("card");
+        card.dataset.modalidade = resultado.vaga.modalidade.toLowerCase();
         card.innerHTML = `<h3>${resultado.vagaCargo}</h3>
             <p><strong>Empresa:</strong> ${resultado.empresa}</p>
             <p><strong>Compatibilidade:</strong> ${resultado.compatibilidade}%</p>
@@ -19,8 +21,10 @@ export function exibirResultadosInterface(relatorio) {
                 <p>❌ Faltantes: ${resultado.faltantes.join(', ')}</p>
             </div>`;
 
-        container.appendChild(card);
+        fragmento.appendChild(card);
     });
+
+    container.appendChild(card);
 
     console.log("Exibindo resultado na interface");
 
@@ -34,7 +38,7 @@ export function configurarFormulario(aoEnviarFormulario) {
     const statusSistema = document.getElementById("status-sistema");
 
     if (!formulario) return;
-    
+
     formulario.addEventListener("submit", function (evento) {
         evento.preventDefault();
         const nome = document.getElementById("input-nome").value.trim();
@@ -66,3 +70,50 @@ export function configurarFormulario(aoEnviarFormulario) {
         statusSistema.textContent = "Análise concluída com sucesso!";
     });
 }
+
+// Filtra as vagas por cargo
+
+export function filtrarVagasPorCargo(termo) {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        const cargo = card.querySelector('h3').textContent.toLowerCase();
+        if (!cargo.includes(termo.toLowerCase())) {
+            card.style.display = 'none';
+        } else {
+            card.style.display = 'block';
+        }
+    });
+}
+
+// Logica de Modalidade
+
+export function aplicarFiltros() {
+    const termo = document.getElementById('input-modalidade').value.toLowerCase().trim();
+    const modalidade = document.getElementById('filtro-modalidade').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.card');
+    const container = document.getElementById('container-cards');
+
+    let encontrouVagas = false;
+
+    cards.forEach(card => {
+        const titulo = card.querySelector('h3').textContent.toLowerCase();
+        const cardModalidade = card.dataset.modalidade.toLowerCase();
+        const condicaoBusca = titulo.includes(termo);
+        const condicaoModalidade = (modalidade === "todos" || cardModalidade === modalidade);
+        if (condicaoBusca && condicaoModalidade) {
+            card.style.display = 'block';
+            encontrouVagas = true;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+    let mensagemZero = document.getElementById('mensagem-zero');
+    if (!mensagemZero) {
+        mensagemZero = document.createElement("p");
+        mensagemZero.id = "mensagem-zero";
+        container.appendChild(mensagemZero);
+    }
+
+    mensagemZero.textContent = encontrouAlgum ? "" : "Nenhuma vaga encontrada com estes filtros.";
+}
+
