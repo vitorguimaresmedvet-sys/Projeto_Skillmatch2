@@ -28,8 +28,37 @@ body {
     background: #fff;
 }
 
+.destaque-recomendado {
+    border: 2px solid #2ecc71; 
+    background-color: #e8f8f0;
+    transform: scale(1.02);
+}
+
+.perfil-section, .vagas-section{
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center; 
+}
+
+.form-perfil{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
 @media (min-width: 768px) {
+    .perfil-section, .vagas-section{
+        padding: 40px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
     .cards-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
         justify-content: center;
     }
 }
