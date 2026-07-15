@@ -117,3 +117,22 @@ export function aplicarFiltros() {
     mensagemZero.textContent = encontrouAlgum ? "" : "Nenhuma vaga encontrada com estes filtros.";
 }
 
+// Função responsável unicamente por pegar dados existentes e colocar dentro dos inputs
+export function preencherFormulario(perfil) {
+    if (!perfil) return; 
+
+    const inputNome = document.querySelector("#nome"); 
+    const inputArea = document.querySelector("#area");
+    const inputHabilidades = document.querySelector("#habilidades"); 
+    const inputExperiencia = document.querySelector("#experiencia");
+    
+    if (inputNome) inputNome.value = perfil.nome || "";
+    if (inputArea) inputArea.value = perfil.area || "";
+    if (inputHabilidades) {
+        // Se as habilidades forem um array, junta com vírgula para exibir no input de texto
+        inputHabilidades.value = Array.isArray(perfil.habilidades) 
+            ? perfil.habilidades.join(", ") 
+            : perfil.habilidades || "";
+    }
+    if (inputExperiencia) inputExperiencia.value = perfil.experienciaMeses || "";
+}

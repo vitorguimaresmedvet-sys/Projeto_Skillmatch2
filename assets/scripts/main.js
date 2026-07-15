@@ -1,9 +1,11 @@
 import { buscarVagas, obterPerfilLocalStorage, salvarPerfilLocalStorage, carregarPerfilLocalStorage } from './dados.js';
 import { avaliarCandidato, Candidato } from './motor.js';
 import { exibirResultadosInterface, configurarFormulario, filtrarVagasPorCargo, aplicarFiltros } from './ui.js';
+import { buscarVagas, obterPerfilLocalStorage, salvarPerfilLocalStorage } from './dados.js';
+import { avaliarCandidato, Candidato, VagaFrontEnd } from './motor.js';
+import { exibirResultadosInterface, configurarFormulario, preencherFormulario } from './ui.js';
 
 // Função Closure real para contagem de análises realizadas
-
 function criarContadorDeAnalises() {
     let contagem = 0;
     return function () {
@@ -17,28 +19,41 @@ const incrementarAnalises = criarContadorDeAnalises();
 let listaVagasGlobal = [];
 
 async function iniciarAplicacao() {
-
     console.log("⚙️ SkillMatch 2.0: Inicializando sistemas modulares...");
     
+    const statusSistema = document.getElementById("status-sistema");
+    
+    // 1. Estado: Carregando
+    statusSistema.textContent = "Carregando banco de dados de vagas...";
+
     try {
         listaVagasGlobal = await buscarVagas();
+
+        // 2. Estado: Vazio
+        if (listaVagasGlobal.length === 0) {
+            statusSistema.textContent = "Nenhuma vaga encontrada, tente novamente mais tarde.";
+            return; 
+        }
+
+        // 3. Estado: Sucesso
+        statusSistema.textContent = "Vagas carregadas com sucesso!";
         console.log(`📋 Banco de dados de vagas carregado com sucesso (${listaVagasGlobal.length} vagas encontradas).`);
-            configurarFormulario((dadosCandidato) => {
+
+        // Configura o evento de clique/envio do formulário passando a função de callback
+        configurarFormulario((dadosCandidato) => {
             console.log(`📥 Dados recebidos do formulário! Nome: ${dadosCandidato.nome}`);
 
-            // 1. Instanciamos a classe com os dados reais digitados na tela
             const perfilCandidato = new Candidato(
                 dadosCandidato.nome, 
                 null, 
                 dadosCandidato.area, 
                 dadosCandidato.habilidades, 
-                dadosCandidato.experiencia // O nome que veio do seu ui.js
+                dadosCandidato.experiencia
             );
 
             salvarPerfilLocalStorage(perfilCandidato);
             console.log("💾 Perfil salvo no LocalStorage!");
 
-            // 2. Roda a análise percorrendo as vagas globais
             const relatorioResultados = listaVagasGlobal.map(vaga => {
                 const numeroAnalise = incrementarAnalises();
                 const resultadoMecanismo = avaliarCandidato(perfilCandidato, vaga);
@@ -54,11 +69,19 @@ async function iniciarAplicacao() {
                 };
             });
 
-            // 3. Manda para a interface (cuidado com a letra 's' que corrigimos!)
             exibirResultadosInterface(relatorioResultados);
         });
+
+
+        const perfilSalvo = obterPerfilLocalStorage();
+        if (perfilSalvo) {
+            console.log("💾 Perfil carregado do LocalStorage!");
+            preencherFormulario(perfilSalvo); // Usando a função de preencher!
+        }
         
     } catch (erro) {
+        // 4. Estado: Erro
+        statusSistema.textContent = "Ops! Ocorreu um erro ao buscar as vagas. Tente novamente mais tarde.";
         console.error("🚨 Falha crítica ao inicializar aplicação modular:", erro);
     }
 }
