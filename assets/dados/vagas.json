@@ -22,5 +22,37 @@
       "requisitos": ["JavaScript", "Node.js", "Docker", "React"],
       "salario": 7000,
       "modalidade": "Remoto"
+   },
+   {
+      "id": "03",
+      "empresa": "GlobalTech",
+      "cargo": "Desenvolvedor Front-End Senior",
+      "requisitos": ["HTML", "CSS", "JavaScript", "React"],
+      "salario": 9000,
+      "modalidade": "Presencial"
+   },
+   {
+      "id": "04",
+      "empresa": "Tech Innovations",
+      "cargo": "Desenvolvedor Full-Stack",
+      "requisitos": ["JavaScript", "Node.js", "SQL", "React"],
+      "salario": 8000,
+      "modalidade": "Remoto"
+   },
+   {
+      "id": "05",
+      "empresa": "Tech Innovations",
+      "cargo": "Desenvolvedor Full-Stack",
+      "requisitos": ["JavaScript", "Node.js", "SQL", "React"],
+      "salario": 8000,
+      "modalidade": "Remoto"
+   },
+   {
+      "id": "06",
+      "empresa": "Tech Innovations",
+      "cargo": "Desenvolvedor Front-End",
+      "requisitos": ["JS", "HTML", "CSS", "React"],
+      "salario": 4000,
+      "modalidade": "Remoto"
    }
 ]

@@ -3,15 +3,60 @@
     padding: 0;
     box-sizing: border-box;
 }
+:root{
+    --primary: #4f46e5; 
+    --primary-hover: #4338ca;
+    --secundary: #000000;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #1e293b;
+    --border: #e2e8f0;
+}
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: var(--bg);
+    color: var(--text);
 }
 
+header {
+    background-color: var(--primary);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
 
+.card {
+    border: 2px solid var(--border);
+    padding: 15px;
+    border-radius: 12px;
+    background: var(--card);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 8px rgba(2, 2, 2, 0.2);
+}
+
+button {
+    background: var(--primary);
+    color: white;
+    border: 1px solid var(--secundary);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: var(--primary-hover);
+}
 
 .cards-grid {
     display: flex;
