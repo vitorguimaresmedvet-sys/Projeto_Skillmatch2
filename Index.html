@@ -1,99 +1,231 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Projeto Skillmatch 2.0" />
-        <link rel="stylesheet" href="/assets/style/style.css">
-        <title>SkillMatch  - Match Profissional Inteligente</title>
-    </head>
-    <body>
 
-        <header role="banner">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-            <div class="busca-container">
-                <input type="text" id="input-busca" placeholder="Buscar vagas..." />
-                <button type="submit" id="btn-buscar">Buscar</button>
-                <select id="filtro-modalidade">
-                    <option value="" disabled selected>Modalidade</option>
-                    <option value="Presencial">Presencial</option>
-                    <option value="Remoto">Remoto</option>
-                </select>
-            </div>
+    <meta name="description" content="Projeto SkillMatch 2.0">
 
-            <div class="header-container">
-                <h1>SkillMatch</h1>
-                <p>Match Profissional Inteligente</p>
-                <nav role="navigation">
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#perfil-ancora">Meu Perfil</a></li>
-                        <li><a href="#vagas-ancora">Vagas Disponíveis</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header> 
+    <link rel="stylesheet" href="/assets/style/style.css">
 
-        <main id="perfil-ancora">
-        
-        <section class="perfil-section" aria-labelledby="titulo-perfil">
-            <h2 id="titulo-perfil">Seu Perfil Profissional</h2>
-            <p>Preencha seus dados técnicos para calibrar o motor de compatibilidade.</p>
+    <title>SkillMatch - Match Profissional Inteligente</title>
+</head>
+
+<body>
+
+    <header role="banner">
+
+        <div class="header-container">
+
+            <img src="/assets/img/##" alt="Logo SkillMatch">
+
+            <h1>SkillMatch</h1>
+
+            <p>Match Profissional Inteligente</p>
+
+            <nav role="navigation">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#perfil-ancora">Meu Perfil</a></li>
+                    <li><a href="#vagas-ancora">Vagas Disponíveis</a></li>
+                </ul>
+            </nav>
+
+        </div>
+
+    </header>
+
+    <main>
+
+        <section id="perfil-ancora" class="perfil-section" aria-labelledby="titulo-perfil">
+
+            <h2 id="titulo-perfil">
+                Seu Perfil Profissional
+            </h2>
+
+            <p>
+                Preencha seus dados técnicos e pretensões para calibrar o motor de compatibilidade.
+            </p>
 
             <form id="form-perfil" novalidate>
+
                 <div class="form-group">
                     <label for="input-nome">Nome Completo:</label>
-                    <input type="text" id="input-nome" name="nome" placeholder="Nome Completo" required />
+
+                    <input type="text" id="input-nome" name="nome" placeholder="Nome Completo" required>
+
                     <span class="erro-mensagem" id="erro-nome" aria-live="assertive"></span>
                 </div>
 
-                <div class="form-group">
-                    <label for="select-area">Área de Atuação:</label>
-                    <select id="select-area" name="area" required>
-                        <option value="" disabled selected>Selecione sua área...</option>
-                        <option value="Front-End">Front-End</option>
-                        <option value="Back-End">Back-End</option>
-                        <option value="Full-Stack">Full-Stack</option>
-                    </select>
-                    <span class="erro-mensagem" id="erro-area" aria-live="assertive"></span>
+                <div class="form-group-row">
+
+                    <div class="form-group">
+
+                        <label for="select-area">
+                            Área de Atuação:
+                        </label>
+
+                        <select id="select-area" name="area" required>
+
+                            <option value="">Selecione...</option>
+
+                            <option value="Front-End">Front-End</option>
+                            <option value="Back-End">Back-End</option>
+                            <option value="Full-Stack">Full-Stack</option>
+
+                        </select>
+
+                        <span class="erro-mensagem" id="erro-area" aria-live="assertive"></span>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="input-experiencia">
+                            Experiência (meses):
+                        </label>
+
+                        <input type="number" id="input-experiencia" name="experienciaMeses" min="0"
+                            placeholder="Ex.: 12" required>
+
+                        <span class="erro-mensagem" id="erro-experiencia" aria-live="assertive"></span>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group-row">
+
+                    <div class="form-group">
+
+                        <label for="input-pretensao">
+                            Pretensão Salarial Mínima (R$):
+                        </label>
+
+                        <input type="number" id="input-pretensao" name="pretensaoSalarial" min="0"
+                            placeholder="Apenas Numeros. Ex.: 5000" required>
+
+                        <span class="erro-mensagem" id="erro-pretensao" aria-live="assertive"></span>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="select-modalidade-pref">
+                            Modalidade Preferida:
+                        </label>
+
+                        <select id="select-modalidade-pref" name="modalidadePreferencia" required>
+
+                            <option value="">Selecione...</option>
+                            <option value="Presencial">Presencial</option>
+                            <option value="Remoto">Remoto</option>
+                            <option value="Híbrido">Híbrido</option>
+
+                        </select>
+
+                        <span class="erro-mensagem" id="erro-modalidade" aria-live="assertive"></span>
+
+                    </div>
+
                 </div>
 
                 <div class="form-group">
-                    <label for="input-habilidades">Habilidades (separadas por vírgula):</label>
-                    <input type="text" id="input-habilidades" name="habilidades" placeholder="Ex: JavaScript, HTML, CSS, React" required />
-                    <small id="ajuda-habilidades">Digite as tecnologias que você domina separadas por vírgula.</small>
+
+                    <label for="input-habilidades">
+                        Suas Habilidades (separadas por vírgula):
+                    </label>
+
+                    <input type="text" id="input-habilidades" name="habilidades"
+                        placeholder="Ex: JavaScript, Node.js, SQL, React" required>
+
+                    <small id="ajuda-habilidades">
+                        Digite as tecnologias separadas por vírgula.
+                    </small>
+
                     <span class="erro-mensagem" id="erro-habilidades" aria-live="assertive"></span>
                 </div>
 
-                <div class="form-group">
-                    <label for="input-experiencia">Experiência (em meses):</label>
-                    <input type="number" id="input-experiencia" name="experienciaMeses" min="0" placeholder="Ex: 12" required />
-                    <span class="erro-mensagem" id="erro-experiencia" aria-live="assertive"></span>
-                </div>
+                <button type="submit" id="btn-salvar">
 
-                <button type="submit" id="btn-salvar">Salvar Perfil e Analisar</button>
+                    Salvar Perfil e Otimizar Matches
+
+                </button>
+
             </form>
+
         </section>
 
+        <div class="busca-container">
+            <input type="text" id="input-busca" placeholder="Buscar vagas..." />
+
+            <select id="filtro-modalidade">
+                
+                <option value="" disabled selected>Modalidade</option>
+                <option value="Presencial">Presencial</option>
+                <option value="Remoto">Remoto</option>
+                <option value="Híbrido">Híbrido</option>
+                
+            </select>
+
+            <button type="submit" id="btn-buscar"> Buscar </button>
+
+        </div>
+
         <section id="vagas-ancora" class="vagas-section" aria-labelledby="titulo-vagas">
-            <h2 id="titulo-vagas">Vagas Compatíveis</h2>
-            
-            <div id="status-sistema" aria-live="polite" class="status-alerta"></div>
 
-            <div id="mensagem-zero" aria-live="polite" class="mensagem-feedback"></div>
+            <div class="vagas-header">
 
-            <div id="container-cards" class="cards-grid"></div>
+                <h2 id="titulo-vagas">
+                    Vagas Disponíveis
+                </h2>
+
+            </div>
+
+            <div id="status-sistema" class="status-alerta" aria-live="polite">
+
+            </div>
+
+            <div id="mensagem-zero" class="mensagem-feedback" aria-live="polite">
+            </div>
+
+            <div id="container-cards" class="cards-grid">
+            </div>
+
         </section>
 
     </main>
 
+    <div id="modal-detalhe-vaga" class="modal" role="dialog" aria-hidden="true">
+
+        <div class="modal-content">
+
+            <button class="close-modal" aria-label="Fechar Modal">
+
+                &times;
+
+            </button>
+
+            <div id="modal-body-vaga">
+
+            </div>
+
+        </div>
+
+    </div>
+
     <footer role="contentinfo">
-        <p>&copy; 2026 SkillMatch - Todos os direitos reservados.</p>
+
+        <p>
+            &copy; 2026 SkillMatch - Todos os direitos reservados.
+        </p>
+
     </footer>
 
-        <script type="module" src="/assets/scripts/main.js"></script>
+    <script type="module" src="/assets/scripts/main.js"></script>
 
-    </body>
-    
+</body>
+
 </html>

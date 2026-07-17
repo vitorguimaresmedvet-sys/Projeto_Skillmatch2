@@ -17,9 +17,9 @@ let listaVagasGlobal = [];
 
 async function iniciarAplicacao() {
     console.log("⚙️ SkillMatch 2.0: Inicializando sistemas modulares...");
-    
+
     const statusSistema = document.getElementById("status-sistema");
-    
+
     // 1. Estado: Carregando
     statusSistema.textContent = "Carregando banco de dados de vagas...";
 
@@ -29,7 +29,7 @@ async function iniciarAplicacao() {
         // 2. Estado: Vazio
         if (listaVagasGlobal.length === 0) {
             statusSistema.textContent = "Nenhuma vaga encontrada, tente novamente mais tarde.";
-            return; 
+            return;
         }
 
         // 3. Estado: Sucesso
@@ -41,11 +41,13 @@ async function iniciarAplicacao() {
             console.log(`📥 Dados recebidos do formulário! Nome: ${dadosCandidato.nome}`);
 
             const perfilCandidato = new Candidato(
-                dadosCandidato.nome, 
-                null, 
-                dadosCandidato.area, 
-                dadosCandidato.habilidades, 
-                dadosCandidato.experiencia
+                dadosCandidato.nome,
+                null,
+                dadosCandidato.area,
+                dadosCandidato.habilidades,
+                dadosCandidato.experiencia,
+                dadosCandidato.pretensaoSalarial,
+                dadosCandidato.modalidadePreferencia
             );
 
             salvarPerfilLocalStorage(perfilCandidato);
@@ -54,29 +56,36 @@ async function iniciarAplicacao() {
             const relatorioResultados = listaVagasGlobal.map(vaga => {
                 const numeroAnalise = incrementarAnalises();
                 const resultadoMecanismo = avaliarCandidato(perfilCandidato, vaga);
-                
+
                 return {
                     analiseID: numeroAnalise,
                     vagaCargo: vaga.cargo,
                     empresa: vaga.empresa || "Tech Corp",
-                    modalidade: vaga.modalidade,
-                    compatibilidade: resultadoMecanismo.percentual,
+                    salarioVaga: vaga.salario,
+                    modalidadeVaga: vaga.modalidade,
+                    compatibilidade: resultadoMecanismo.compatibilidade,
                     classificacao: resultadoMecanismo.classificacao,
                     encontradas: resultadoMecanismo.encontradas,
                     faltantes: resultadoMecanismo.faltantes
                 };
             });
 
-            exibirResultadosInterface(relatorioResultados);
+            exibirResultadosInterface(relatorioResultados, perfilCandidato);
 
-            const melhorVaga = relatorioResultados.reduce((vagaAtual, vagaComparada) => {
-    return (vagaComparada.compatibilidade > vagaAtual.compatibilidade) ? vagaComparada : vagaAtual;
-    }, relatorioResultados[0]);
-            console.log(`💡 Melhor vaga: ${melhorVaga.vagaCargo} na empresa ${melhorVaga.empresa}, com ${melhorVaga.compatibilidade.toFixed(2)}% dos requisitos atendidos.`);
-        if (melhorVaga) {
-    destacarMelhorVaga(melhorVaga.analiseID);
-    }
+let melhorVaga = null;
+
+if (relatorioResultados.length > 0) {
+    melhorVaga = relatorioResultados.reduce((vagaAtual, vagaComparada) => {
+        return (vagaComparada.compatibilidade > vagaAtual.compatibilidade) ? vagaComparada : vagaAtual;
     });
+}
+
+if (melhorVaga) {
+    console.log( `💡 Melhor vaga: ${melhorVaga.vagaCargo} na empresa ${melhorVaga.empresa}, com ${melhorVaga.compatibilidade.toFixed(2)}% dos requisitos atendidos.`);
+
+    destacarMelhorVaga(melhorVaga.analiseID);
+}
+        });
 
 
         const perfilSalvo = obterPerfilLocalStorage();
@@ -84,7 +93,7 @@ async function iniciarAplicacao() {
             console.log("💾 Perfil carregado do LocalStorage!");
             preencherFormulario(perfilSalvo); // Usando a função de preencher!
         }
-        
+
     } catch (erro) {
         // 4. Estado: Erro
         statusSistema.textContent = "Ops! Ocorreu um erro ao buscar as vagas. Tente novamente mais tarde.";
@@ -99,7 +108,13 @@ document.addEventListener("DOMContentLoaded", iniciarAplicacao);
 const inputBusca = document.getElementById("input-busca");
 const selectModalidade = document.getElementById("filtro-modalidade");
 
-if (inputBusca && selectModalidade) {
+if (inputBusca) {
     inputBusca.addEventListener("input", aplicarFiltros);
+}
+
+if (selectModalidade) {
     selectModalidade.addEventListener("change", aplicarFiltros);
 }
+
+console.log("%c👀 Encontrou um easter egg!", "color:#4f46e5;font-weight:bold;");
+console.log("Se você está lendo isso, provavelmente gosta tanto de código quanto nós. 😄");

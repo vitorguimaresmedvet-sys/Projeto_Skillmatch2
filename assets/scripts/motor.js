@@ -1,7 +1,7 @@
 // 1. Classes de Dominio Exportadas
 
-export class Vagas{
-    constructor(cargo, salario, requisitos, modalidade, id = null){
+export class Vagas {
+    constructor(cargo, salario, requisitos, modalidade, id = null) {
         this.id = id;
         this.cargo = cargo;
         this.salario = salario;
@@ -10,30 +10,32 @@ export class Vagas{
     }
 }
 
-export class Candidato{
-    constructor(nome, idade, area, habilidades, experienciaMeses){
+export class Candidato {
+    constructor(nome, idade, area, habilidades, experienciaMeses, pretensaoSalarial = 0, modalidadePreferencia = "") {
         this.nome = nome;
         this.idade = idade;
         this.area = area;
         this.habilidades = habilidades;
         this.experienciaMeses = experienciaMeses;
+        this.pretensaoSalarial = pretensaoSalarial;
+        this.modalidadePreferencia = modalidadePreferencia;
     }
 }
 
-export class VagaFrontEnd extends Vagas{
-    constructor(cargo, empresa, requisitos, salario, modalidade, nivel){
+export class VagaFrontEnd extends Vagas {
+    constructor(cargo, empresa, requisitos, salario, modalidade, nivel) {
         super(cargo, salario, requisitos, modalidade);
         this.empresa = empresa;
         this.nivel = nivel;
     }
-    exibirNivel(){
+    exibirNivel() {
         return `Nivel da vaga: ${this.nivel}`;
     }
 }
 
 // 2. Logica de Compatibilidade Exportada
 
-export function avaliarCandidato(candidatoObjeto, vagaObjeto, exibirLogs = true){
+export function avaliarCandidato(candidatoObjeto, vagaObjeto, exibirLogs = true) {
 
     let requisitosVaga = vagaObjeto.requisitos || [];
     const habilidadesCandidato = candidatoObjeto.habilidades || [];
@@ -46,14 +48,14 @@ export function avaliarCandidato(candidatoObjeto, vagaObjeto, exibirLogs = true)
         console.log("Requisitos da vaga:", requisitosVaga);
         console.log("Habilidades do candidato:", habilidadesCandidato);
     }
-        
-    const habilidadesCorrespondentes = requisitosVaga.filter((requisito) => 
-    habilidadesCandidato.includes(requisito)
-);
 
-const habilidadesFaltantes = requisitosVaga.filter((requisito) => 
-    !habilidadesCandidato.includes(requisito)
-);
+    const habilidadesCorrespondentes = requisitosVaga.filter((requisito) =>
+        habilidadesCandidato.includes(requisito)
+    );
+
+    const habilidadesFaltantes = requisitosVaga.filter((requisito) =>
+        !habilidadesCandidato.includes(requisito)
+    );
     const requisitosAtendidos = habilidadesCorrespondentes.length;
     const totalRequisitos = requisitosVaga.length;
     const percentualAtendimento = (requisitosAtendidos / totalRequisitos) * 100;
@@ -64,10 +66,33 @@ const habilidadesFaltantes = requisitosVaga.filter((requisito) =>
     else classificacao = "Baixa compatibilidade";
 
     return {
-        percentual: percentualAtendimento,
-        classificacao: classificacao,
+
+        vagaCargo: vagaObjeto.cargo,
+
+        empresa: vagaObjeto.empresa,
+
+        salarioVaga: vagaObjeto.salario,
+
+        modalidadeVaga: vagaObjeto.modalidade,
+
+        compatibilidade: Math.round(percentualAtendimento),
+
+        classificacao,
+
         faltantes: habilidadesFaltantes,
-        encontrados: habilidadesCorrespondentes,
+
         encontradas: habilidadesCorrespondentes
+
     };
 }
+
+/*
+    Obrigado por visitar nosso código.
+
+    Se chegou até aqui,
+    significa que a curiosidade venceu.
+
+    Continue programando.
+
+    :)
+*/
