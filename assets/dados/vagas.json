@@ -54,5 +54,37 @@
       "requisitos": ["JS", "HTML", "CSS", "React"],
       "salario": 4000,
       "modalidade": "Remoto"
+   },
+   {
+      "id": "07",
+      "empresa": "Tech Innovations",
+      "cargo": "Desenvolvedor Front-End",
+      "requisitos": ["JS", "HTML", "CSS", "React"],
+      "salario": 4000,
+      "modalidade": "Remoto"
+   },
+   {
+      "id": "08",
+      "empresa": "Tech Innovations",
+      "cargo": "Desenvolvedor Front-End",
+      "requisitos": ["JS", "HTML", "CSS", "React"],
+      "salario": 4000,
+      "modalidade": "Remoto"
+   },
+   {
+      "id": "09",
+      "empresa": "Tech Innovations",
+      "cargo": "Desenvolvedor Front-End",
+      "requisitos": ["JS", "HTML", "CSS", "React"],
+      "salario": 4000,
+      "modalidade": "Remoto"
+   },
+   {
+      "id": "10",
+      "empresa": "Tech Innovations",
+      "cargo": "Desenvolvedor Front-End",
+      "requisitos": ["JS", "HTML", "CSS", "React"],
+      "salario": 4000,
+      "modalidade": "Remoto"
    }
 ]
