@@ -56,7 +56,7 @@
       "modalidade": "Remoto"
    },
       {
-      "id": "42",
+      "id": 42,
       "empresa": "Deep Thought Labs",
       "cargo": "Especialista em Respostas Definitivas",
       "requisitos": [ "Lógica", "Paciência", "Criatividade", "Toalha" ],
