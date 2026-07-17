@@ -85,3 +85,14 @@ export function avaliarCandidato(candidatoObjeto, vagaObjeto, exibirLogs = true)
 
     };
 }
+
+/*
+    Obrigado por visitar nosso código.
+
+    Se chegou até aqui,
+    significa que a curiosidade venceu.
+
+    Continue programando.
+
+    :)
+*/

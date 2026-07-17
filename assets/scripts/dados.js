@@ -61,3 +61,6 @@ export function obterPerfilLocalStorage() {
     }
 }
 
+// Se você está lendo isso...
+// provavelmente também gosta de descobrir como as coisas funcionam.
+// Continue assim.

@@ -115,3 +115,6 @@ if (inputBusca) {
 if (selectModalidade) {
     selectModalidade.addEventListener("change", aplicarFiltros);
 }
+
+console.log("%c👀 Encontrou um easter egg!", "color:#4f46e5;font-weight:bold;");
+console.log("Se você está lendo isso, provavelmente gosta tanto de código quanto nós. 😄");
