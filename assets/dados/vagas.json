@@ -55,6 +55,14 @@
       "salario": 6800,
       "modalidade": "Remoto"
    },
+      {
+      "id": "42",
+      "empresa": "Deep Thought Labs",
+      "cargo": "Especialista em Respostas Definitivas",
+      "requisitos": [ "Lógica", "Paciência", "Criatividade", "Toalha" ],
+      "salario": 424242,
+      "modalidade": "Remoto"
+   },
    {
       "id": 8,
       "empresa": "CodeSphere",
@@ -93,14 +101,6 @@
       "cargo": "Desenvolvedor Back-End Node.js",
       "requisitos": ["JavaScript", "Node.js", "SQL", "Docker"],
       "salario": 8500,
-      "modalidade": "Remoto"
-   },
-      {
-      "id": "42",
-      "empresa": "Deep Thought Labs",
-      "cargo": "Especialista em Respostas Definitivas",
-      "requisitos": [ "Lógica", "Paciência", "Criatividade", "Toalha" ],
-      "salario": 424242,
       "modalidade": "Remoto"
    }
 ]
