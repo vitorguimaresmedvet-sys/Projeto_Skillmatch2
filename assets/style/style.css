@@ -315,10 +315,30 @@
         }
 
         header{
-            padding:20px;
+            text-align:center;
+            padding:20px;            
         }
+
+        .header-container{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+    }
+
+        .header-container h1, .header-container p{
+        text-align:center;
+    }
+
+    nav ul{
+        justify-content:center;
+        align-items:center;
+    }
 
         .perfil-section,.vagas-section{
             padding:20px;
         }
     }
+
+

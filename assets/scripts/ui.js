@@ -178,10 +178,12 @@ function abrirModalDetalhes(resultado, candidato) {
     document.getElementById("btn-candidatar")
         .addEventListener("click", () => {
 
-            alert(`Simulação realizada com sucesso!\n\nPerfil: ${candidato.nome}\nVaga: ${resultado.vagaCargo}`);
+alert(`Simulação realizada com sucesso!\n\nPerfil: ${candidato.nome}\nVaga: ${resultado.vagaCargo}`);
 
-            modal.classList.remove("active");
-            modal.setAttribute("aria-hidden", "true");
+document.activeElement.blur();
+
+modal.classList.remove("active");
+modal.setAttribute("aria-hidden", "true");
         });
 }
 

@@ -38,12 +38,17 @@ export class VagaFrontEnd extends Vagas {
 export function avaliarCandidato(candidatoObjeto, vagaObjeto, exibirLogs = true) {
 
     let requisitosVaga = vagaObjeto.requisitos || [];
-    const habilidadesCandidato = candidatoObjeto.habilidades || [];
 
-    if (typeof requisitosVaga === "string") {
-        requisitosVaga = [requisitosVaga];
-    }
+const habilidadesCandidato =
+    (candidatoObjeto.habilidades || [])
+        .map(habilidade => habilidade.toLowerCase());
 
+if (typeof requisitosVaga === "string") {
+    requisitosVaga = [requisitosVaga];
+}
+
+requisitosVaga =
+    requisitosVaga.map(requisito => requisito.toLowerCase());
     if (exibirLogs) {
         console.log("Requisitos da vaga:", requisitosVaga);
         console.log("Habilidades do candidato:", habilidadesCandidato);
