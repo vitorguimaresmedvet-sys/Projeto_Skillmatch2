@@ -41,6 +41,15 @@ Desenvolver uma aplicação web de "Match Profissional Inteligente", projetada p
 * **S6:** Design Moderno e identidade visual.
 * **S7:** Documentação e entrega final.
 
+## Links do Projeto
+
+* **Video:** 
+https://drive.google.com/file/d/1m2CL30QUPl_ErzQw-tXi8jZIsPPZuGjq/view?usp=sharing
+* **Github:**
+https://github.com/vitorguimaresmedvet-sys/Projeto_Skillmatch2
+* **Trello:**
+https://trello.com/b/qr0RdMDE/projeto-skillmatch-20
+
 ## Autor
 
 Vitor Augusto Gonçalves Guimarães
